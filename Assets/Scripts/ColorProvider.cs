@@ -10,7 +10,6 @@ public class ColorProvider : MonoBehaviour
 
     public Color GetColor(int index)
     {
-        
         return _colors[index];
     }
 }
