@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -4863583691283626442}
         m_TargetAssemblyTypeName: Crayon, Assembly-CSharp
-        m_MethodName: GetColor
+        m_MethodName: SetActiveCrayon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

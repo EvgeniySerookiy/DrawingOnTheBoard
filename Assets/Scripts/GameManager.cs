@@ -1,13 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public List<Line> _lines = new();
+    
     [SerializeField] private CrayonsManager _crayonsManager;
-    [SerializeField] private SpongeManager _spongeManager;
     [SerializeField] private Line _linePrefab;
     [SerializeField] private Image _image;
     [SerializeField] private RectTransform _chalkArea;
+    [SerializeField] private Sponge _spongePrefab;
+    [SerializeField] private Transform _transform;
+    
+    private Sponge _sponge;
     private RectTransform _specificAreaRectTransform;
     private Line _currentLine;
     private Color _startColor;
@@ -16,21 +22,23 @@ public class GameManager : MonoBehaviour
     {
         _startColor = _image.color;
         _specificAreaRectTransform = _chalkArea.GetComponent<RectTransform>();
-        _spongeManager.OnSpongePressed += HandleSpongePressed;
+        
         
         foreach (Crayon crayon in _crayonsManager.GetCrayons())
         {
-            crayon.OnColorSelected += HandleColorSelected;
+            crayon.ColorSelected += HandleColorSelected;
         }
+        
+        Initialize();
     }
 
     private void OnDestroy()
     {
-        _spongeManager.OnSpongePressed -= HandleSpongePressed;
+        _sponge.OnSpongePressed -= HandleSpongePressed;
         
         foreach (Crayon crayon in _crayonsManager.GetCrayons())
         {
-            crayon.OnColorSelected -= HandleColorSelected;
+            crayon.ColorSelected -= HandleColorSelected;
         }
     }
 
@@ -40,6 +48,8 @@ public class GameManager : MonoBehaviour
         
         _currentLine = Instantiate(_linePrefab, transform);
         _currentLine.SetColor(_image.color);
+        
+        _lines.Add(_currentLine);
     }
 
     private void Update()
@@ -70,13 +80,22 @@ public class GameManager : MonoBehaviour
     
     private void HandleSpongePressed()
     {
-        Line[] lines = FindObjectsOfType<Line>();
-        
-        foreach (var line in lines)
+        foreach (var line in _lines)
         {
-            Destroy(line.gameObject);
+            if (line != null)
+            {
+                Destroy(line.gameObject);
+            }
         }
+        
+        _lines.Clear();
 
         _image.color = _startColor;
+    }
+    
+    private void Initialize()
+    { 
+        _sponge = Instantiate(_spongePrefab, _transform);
+        _sponge.OnSpongePressed += HandleSpongePressed;
     }
 }

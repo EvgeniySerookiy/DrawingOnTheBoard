@@ -271,6 +271,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a849f420ed14c4ab634a7173ca6238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lines:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _crayonsManager: {fileID: 548525831}
   _spongeManager: {fileID: 548525832}
   _linePrefab: {fileID: -8953876586185876169, guid: 9436babf262264be3909d50551028f67, type: 3}

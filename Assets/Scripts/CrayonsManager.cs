@@ -4,7 +4,8 @@ using UnityEngine;
 public class CrayonsManager : MonoBehaviour
 {
     [SerializeField] private Crayon _crayonPrefab;
-    [SerializeField] private int count = 6;
+    private int count = 6;
+    
     private ColorProvider _colorProvider = new();
     private List<Crayon> _crayons = new();
     private int index;
@@ -13,11 +14,11 @@ public class CrayonsManager : MonoBehaviour
     {
         for (var i = 0; i < count; i++)
         {
-            Initialize();
+            SpawnCrayons();
         }
     }
 
-    private void Initialize()
+    private void SpawnCrayons()
     {
         Crayon newCrayon = Instantiate(_crayonPrefab, transform);
         newCrayon.SetColor(_colorProvider.GetColor(index));

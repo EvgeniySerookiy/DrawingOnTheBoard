@@ -4,19 +4,13 @@ using Image = UnityEngine.UI.Image;
 
 public class Crayon : MonoBehaviour
 {
+    public event Action<Color> ColorSelected;
+    
     [SerializeField] private Image _image;
-    private Color _crayonColor;
-    public event Action<Color> OnColorSelected;
 
-    private void Start()
+    public void SetActiveCrayon()
     {
-        _crayonColor = GetComponent<Image>().color;
-    }
-
-    public void GetColor()
-    {
-        OnColorSelected?.Invoke(_crayonColor);
-        Debug.Log("Произошло событие");
+        ColorSelected?.Invoke(_image.color);
     }
 
     public void SetColor(Color color)
