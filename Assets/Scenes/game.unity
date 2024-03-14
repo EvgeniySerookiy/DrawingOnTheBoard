@@ -279,10 +279,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _crayonsManager: {fileID: 548525831}
-  _spongeManager: {fileID: 548525832}
   _linePrefab: {fileID: -8953876586185876169, guid: 9436babf262264be3909d50551028f67, type: 3}
   _image: {fileID: 1083074007}
   _chalkArea: {fileID: 548525826}
+  _spongePrefab: {fileID: -5280356235792494717, guid: 8a67756c815aeae4b8ad5150ffc5a881, type: 3}
+  _transform: {fileID: 548525826}
+  _offset: 0.2
 --- !u!1001 &480537319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -458,7 +460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crayonPrefab: {fileID: -4863583691283626442, guid: ede9cc26926c1514eb8715d7f22e0060, type: 3}
-  count: 6
 --- !u!114 &548525832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af11cd35d83b7411d98ae41f1d776dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spongePrefab: {fileID: -5280356235792494717, guid: 8a67756c815aeae4b8ad5150ffc5a881, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
