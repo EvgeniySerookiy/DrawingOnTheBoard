@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform _chalkArea;
     [SerializeField] private Sponge _spongePrefab;
     [SerializeField] private Transform _transform;
+    [SerializeField] private float _offset = 0.2f;
     
     private Sponge _sponge;
     private RectTransform _specificAreaRectTransform;
@@ -30,6 +31,12 @@ public class GameManager : MonoBehaviour
         }
         
         Initialize();
+    }
+    
+    private void Initialize()
+    { 
+        _sponge = Instantiate(_spongePrefab, _transform);
+        _sponge.OnSpongePressed += HandleSpongePressed;
     }
 
     private void OnDestroy()
@@ -55,18 +62,27 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        _image.transform.position = new Vector3(mousePosition.x - 0.2f, mousePosition.y - 0.2f, _image.transform.position.z);
+        _image.transform.position = new Vector3(mousePosition.x - _offset, mousePosition.y - _offset, _image.transform.position.z);
         
-        if (IsInSpecificArea(mousePosition) && _currentLine != null && Input.GetMouseButton(0))
+        if (IsInSpecificArea(mousePosition) && IsCurrentLineNotNull() && Input.GetMouseButton(0))
         {
             return;
         }
         
-        if (_currentLine != null && Input.GetMouseButton(0))
+        if (IsCurrentLineNotNull() && Input.GetMouseButton(0))
         {
-            _currentLine.AddPoint(new Vector3(mousePosition.x, mousePosition.y, 0.0f));
+            AddPointToCurrentLine(mousePosition);
         }
-        
+    }
+
+    private void AddPointToCurrentLine(Vector2 mousePosition)
+    {
+        _currentLine.AddPoint(new Vector3(mousePosition.x, mousePosition.y, 0.0f));
+    }
+    
+    private bool IsCurrentLineNotNull()
+    {
+        return _currentLine != null;
     }
     
     private bool IsInSpecificArea(Vector2 screenPosition)
@@ -91,11 +107,5 @@ public class GameManager : MonoBehaviour
         _lines.Clear();
 
         _image.color = _startColor;
-    }
-    
-    private void Initialize()
-    { 
-        _sponge = Instantiate(_spongePrefab, _transform);
-        _sponge.OnSpongePressed += HandleSpongePressed;
     }
 }
